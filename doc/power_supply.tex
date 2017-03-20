@@ -1,0 +1,226 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage[per-mode=symbol]{siunitx}
+\usepackage[american,cuteinductors,siunitx]{circuitikz} % smartlabels, cuteinductors
+\sisetup{list-final-separator = {, and }}
+
+\author{Graham Keeth}
+\title{Documentation for Power Supply Project}
+
+\begin{document}
+\maketitle
+\section{Requirements}
+\begin{itemize}
+  \item{one dual-polarity output channel; i.e. one positive and one negative output equidistant from ground}
+  \item{output voltage range: up to \SI{12}{\volt}}
+  \item{current limit adjustable from \SIrange{0}{300}{\milli\ampere}}
+  \item{seven-segment displays for current and voltage setpoints}
+  \item{knob to set current and voltage limits}
+  \item{output on/off switch}
+  \item{indicator light for constant current or constant voltage. Perhaps this
+          could be an LED indicating the output is on with a separate LED for
+          constant current mode.}
+\end{itemize}
+
+\section{Components}
+\begin{itemize}
+  \item{voltage regulation is accomplished using an LM317 for the positive rail
+    and an LM337 for the negative rail}
+  \item{power input to the module is through a \SI{15}{\volt}, \SI{1}{\ampere}
+    AC-to-AC power adapter}
+\end{itemize}
+
+\section{AC Input and Rectification}
+\subsection{Schematic}
+\begin{circuitikz}
+    \draw
+    (3,0) coordinate (N1)
+        node[transformer core](x){}
+        (x.base) node{10:1}
+        (x.A2) to[short] ++(-1, 0)
+        to[sV, l=$V_\mathrm{AC}$] ++(0, 2.1)
+        to[short] (x.A1)
+    (x.B1)
+        to[short] ++(3, 0) coordinate (D1)
+        to[D*] ++(2, 0)
+        to[short] ++(1, 0) coordinate (C1top)
+        to[short] ++(2, 0) coordinate (vposout)
+        to[open, o-o, v^=$V_\mathrm{DC}$] ++(0, -2.1) coordinate (gndout)
+        to[short] (x.B2)
+    ++(2, 0)
+        node[circ]{}
+        node[ground]{}
+    (gndout)
+        to[open, o-o, v^=$V_\mathrm{DC}$] ++(0, -2.1) coordinate (vnegout)
+        to[short] ++(-2, 0) coordinate (C2bot)
+        to[short] ++(-1, 0)
+        to[D*] ++(-2, 0)
+        to[short] ++(0, 4.2)
+        node[circ]{} 
+    (C2bot)
+        node[circ]{}
+        to[pC, l=$C_B$] ++(0, 2.1)
+        node[circ]{}
+        to[pC, l=$C_B$] (C1top)
+        node[circ]{}
+        ;
+        
+    \draw [dashed]
+    (x.A1) ++(-2.5, 1) coordinate (topleft)
+    (x.B1) ++(0.5, 1) coordinate (topright)
+    (x.A2) ++(-2.5, -1) coordinate (botleft)
+    (x.B2) ++(0.5, -1) coordinate (botright)
+
+    (botleft) -- (topleft) -- (topright) -- (botright) -- (botleft)
+    node[midway, anchor=south]{wall wart}
+        ;
+
+    \end{circuitikz}
+    \bigbreak
+
+\subsection{Peak Input Voltage}
+Using a \SI{12}{\volt~RMS} AC input, the peak input voltage will be
+%
+\begin{displaymath}
+  \SI{12}{\volt~RMS} \times \sqrt{2} \approx \SI{17}{\volt}
+\end{displaymath}
+
+\subsection{Ripple Voltage}
+In a half-wave rectifier, peak-to-peak ripple voltage is given by 
+Equation~\eqref{eq:ripple} for a given line frequency $f$, bulk capacitance 
+$C_B$, and load current $I$.
+\begin{equation}
+    \label{eq:ripple}
+    V_\mathrm{ripple} = \frac{I}{f \, C_B}
+\end{equation}
+When unloaded, the output of the rectifier has no ripple. The ripple voltage
+increases linearly with load current.
+%
+The LM317 and LM337 regulators require a minimum load current of
+\SI{10}{\milli\ampere}. At this minimum load current, and with a bulk
+capacitance of \SI{3300}{\micro\farad}, the ripple voltage will be
+%
+\begin{displaymath}
+  \frac{\SI{0.01}{\ampere}}{(\SI{60}{\hertz})(\SI{3300}{\micro\farad})}
+  \approx \SI{51}{\milli\volt}
+\end{displaymath}
+%
+At the supply's maximum load current of \SI{300}{\milli\ampere}, the ripple 
+voltage will be
+%
+\begin{displaymath}
+  \frac{\SI{0.3}{\ampere}}{(\SI{60}{\hertz})(\SI{3300}{\micro\farad})}
+  \approx \SI{1.5}{\volt}
+\end{displaymath}
+
+\subsection{Rectified Output Voltage}
+The maximum voltage at the output of the rectification is given by
+%
+\begin{displaymath}
+  V_\mathrm{DC~max} = V_\mathrm{peak} - V_\mathrm{diode~min} = 
+  \SI{17}{\volt} - \SI{0.8}{\volt} = \SI{16.2}{\volt}
+\end{displaymath}
+%
+The minimum voltage at the output of the rectification circuit, is given by 
+%
+\begin{displaymath}
+  V_\mathrm{DC~min} = V_\mathrm{peak} - V_\mathrm{diode~max} - 
+  V_\mathrm{ripple} = \SI{17}{\volt} - \SI{1.1}{\volt} - \SI{1.5}{\volt} = 
+  \SI{14.4}{\volt}
+\end{displaymath}
+%
+The 7812 and 7912 fixed \SI{\pm 12}{\volt} regulators each have a dropout
+voltage of \SI{2}{\volt}, and therefore will operate correctly off of a
+\SI{14.4}{\volt} supply. The LM317-N and LM337-N regulators have a dropout 
+voltage of less than \SI{2}{\volt}, and therefore will also operate
+correctly at least up to the supply's maximum rated output of \SI{12}{\volt}.
+
+\section{Power Dissipation}
+Maximum power dissipation is with $V_\mathrm{out}$ minimized, i.e.
+$V_\mathrm{out} = \SI{1.25}{\volt}$.
+%
+\begin{displaymath}
+  P_\mathrm{max} = I_\mathrm{max} (V_{\mathrm{DC~max}} - V_{o~\mathrm{min}}) = 
+  \SI{300}{\milli\ampere} \times (\SI{16.2}{\volt} - \SI{1.25}{\volt}) =
+  \SI{4.49}{\watt}
+\end{displaymath}
+%
+The LM317-N and LM337-N thermal parameters (for T0-220 packages) are given in 
+Table~\ref{tab:thermal}.
+%
+\begin{table}
+    \centering
+    \begin{tabular}{llll}
+        \toprule
+        & LM317 & LM337 & Unit \\
+        \midrule
+        $R_{\theta JA}$               & 23.3 & 22.9 & \si{\celsius\per\watt} \\
+        $R_{\theta JC\mathrm{(top)}}$ & 16.2 & 15.7 & \si{\celsius\per\watt} \\
+        $R_{\theta JB}$               & 4.9  & 4.1  & \si{\celsius\per\watt} \\
+        $R_{\theta JC\mathrm{(bot)}}$ & 1.1  & 1.0  & \si{\celsius\per\watt} \\
+        \bottomrule
+    \end{tabular}
+    \caption{Thermal parameters for LM317-N and LM337-N linear regulators in
+        the T0-220 package.}
+    \label{tab:thermal}
+\end{table}
+%
+Both parts have a maximum operating temperature of \SI{125}{\celsius}. A maximum
+design temperature of \SI{100}{\celsius} was selected to give plenty of margin to
+the datasheet maximum temperature. With heatsinks installed, the overall thermal
+resistance from junction to ambient is the sum of the thermal resistances from
+junction to the bottom of the case, the bottom of the case to the heatsink, and
+the heatsink to ambient:
+%
+\begin{displaymath}
+    R_{\theta\mathrm{overall}} = 
+    R_{\theta JC\mathrm{(bot)}} + R_{\theta C\mathrm{(bot)}S} + R_{\theta SA}
+\end{displaymath}
+%
+The junction temperature is:
+%
+\begin{displaymath}
+    T_J = T_A + R_{\theta\mathrm{overall}} \times P_\mathrm{max}
+\end{displaymath}
+%
+At an ambient temperature $T_A$ of \SI{50}{\celsius}, the maximum
+$R_{\theta\mathrm{overall}}$ that gives a junction temperature lower than the
+design maximum temperature is \SI{11.15}{\celsius\per\watt}.
+
+Using $R_{\theta C\mathrm{(bot)}S} = \SI{0.5}{\celsius\per\watt}$ (typical for 
+a heat conducting pad on a TO-220 package, according to 
+\emph{The Art of Electronics}), gives $R_{\theta SA~\mathrm{max}} =
+\SI{9.55}{\celsius\per\watt}$ for the LM317 and \SI{9.65}{\celsius\per\watt} for
+the LM337. 
+
+\section{Control}
+Options
+\begin{itemize}
+  \item{PID loop in software: encoder sets setpoint, DAC/amp generates adj
+          voltage, ADC measures actual output voltage, PID loop corrects}
+  \item{hardware feedback loop: DAC/amp generates desired output voltage,
+          opamp feedback loop compares output to desired output voltage}
+\end{itemize}
+
+\section{Ideas for a future version with more features}
+\begin{itemize}
+  \item{two mutually isolated primary voltage channels}
+  \item{each channel has a variable voltage from \SIrange{0}{15}{\volt}}
+  \item{each channel has a variable current limit from \SIrange{0}{1}{\ampere}}
+  \item{third output channel for logic? Perhaps with voltage and
+      current limits selectable from certain presets, i.e.
+      \SIlist{1.8;2.5;3.3;5;12}{\volt}, and
+      \SIlist{0.1;0.25;0.5;1.0;2.0}{\ampere}.}
+  \item{selectable voltage tracking between two primary channels}
+  \item{seven-segment displays for set voltage and current limits for primary
+      channels (i.e. four separate displays}
+  \item{output enable/disable toggles for each channel}
+  \item{output enable LED for each channel}
+  \item{current-limit warning LED for each channel}
+  \item{separate 10-turn control knobs for each channel's current and voltage
+      controls} 
+\end{itemize}
+
+\end{document}

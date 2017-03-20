@@ -1,0 +1,555 @@
+EESchema Schematic File Version 2
+LIBS:power
+LIBS:device
+LIBS:transistors
+LIBS:conn
+LIBS:linear
+LIBS:regul
+LIBS:74xx
+LIBS:cmos4000
+LIBS:adc-dac
+LIBS:memory
+LIBS:xilinx
+LIBS:microcontrollers
+LIBS:dsp
+LIBS:microchip
+LIBS:analog_switches
+LIBS:motorola
+LIBS:texas
+LIBS:intel
+LIBS:audio
+LIBS:interface
+LIBS:digital-audio
+LIBS:philips
+LIBS:display
+LIBS:cypress
+LIBS:siliconi
+LIBS:opto
+LIBS:atmel
+LIBS:contrib
+LIBS:valves
+LIBS:power_supply-cache
+EELAYER 25 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 6 5
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L LM317T U?
+U 1 1 58D0EFDE
+P 3700 2050
+F 0 "U?" H 3500 2250 50  0000 C CNN
+F 1 "LM317T" H 3700 2250 50  0000 L CNN
+F 2 "TO-220" H 3700 2150 50  0000 C CIN
+F 3 "http://www.mouser.com/ds/2/389/lm217-974117.pdf" H 3700 2050 50  0001 C CNN
+	1    3700 2050
+	1    0    0    -1  
+$EndComp
+$Comp
+L D_ALT D?
+U 1 1 58D0EFE5
+P 3650 1400
+F 0 "D?" H 3650 1500 50  0000 C CNN
+F 1 "1n4004" H 3650 1300 50  0000 C CNN
+F 2 "" H 3650 1400 50  0000 C CNN
+F 3 "https://www.diodes.com/assets/Datasheets/ds28002.pdf" H 3650 1400 50  0001 C CNN
+	1    3650 1400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3500 1400 3000 1400
+Wire Wire Line
+	3000 2000 3000 1400
+Wire Wire Line
+	2500 2000 3300 2000
+Wire Wire Line
+	3800 1400 4400 1400
+Wire Wire Line
+	4400 2000 4400 1400
+Wire Wire Line
+	4100 2000 5600 2000
+Connection ~ 3000 2000
+Text Label 5600 2000 0    60   ~ 0
++VOUT
+Connection ~ 4400 2000
+$Comp
+L CP1 C?
+U 1 1 58D0EFF5
+P 5000 2450
+F 0 "C?" H 5025 2550 50  0000 L CNN
+F 1 "1u" H 5025 2350 50  0000 L CNN
+F 2 "" H 5000 2450 50  0000 C CNN
+F 3 "" H 5000 2450 50  0000 C CNN
+	1    5000 2450
+	1    0    0    -1  
+$EndComp
+$Comp
+L D_ALT D?
+U 1 1 58D0EFFC
+P 4500 2250
+F 0 "D?" V 4500 2350 50  0000 C CNN
+F 1 "1n4004" H 4500 2150 50  0000 C CNN
+F 2 "" H 4500 2250 50  0000 C CNN
+F 3 "https://www.diodes.com/assets/Datasheets/ds28002.pdf" H 4500 2250 50  0001 C CNN
+	1    4500 2250
+	0    -1   1    0   
+$EndComp
+$Comp
+L C C?
+U 1 1 58D0F003
+P 2900 2450
+F 0 "C?" H 2925 2550 50  0000 L CNN
+F 1 "0.1u" H 2925 2350 50  0000 L CNN
+F 2 "" H 2938 2300 50  0000 C CNN
+F 3 "" H 2900 2450 50  0000 C CNN
+	1    2900 2450
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4200 2000 4200 2100
+Connection ~ 4200 2000
+Wire Wire Line
+	4500 2100 4500 2000
+Connection ~ 4500 2000
+Wire Wire Line
+	4500 2400 4500 2600
+Wire Wire Line
+	4200 2400 4200 2500
+$Comp
+L C C?
+U 1 1 58D0F010
+P 4500 2750
+F 0 "C?" H 4525 2850 50  0000 L CNN
+F 1 "C" H 4525 2650 50  0000 L CNN
+F 2 "" H 4538 2600 50  0000 C CNN
+F 3 "" H 4500 2750 50  0000 C CNN
+	1    4500 2750
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3700 2500 4500 2500
+Connection ~ 4500 2500
+Wire Wire Line
+	5000 2300 5000 2000
+Connection ~ 5000 2000
+Wire Wire Line
+	5000 3000 5000 2600
+Wire Wire Line
+	2900 3000 5300 3000
+Wire Wire Line
+	4500 3000 4500 2900
+$Comp
+L Earth #PWR?
+U 1 1 58D0F01E
+P 3500 3100
+F 0 "#PWR?" H 3500 2850 50  0001 C CNN
+F 1 "Earth" H 3500 2950 50  0001 C CNN
+F 2 "" H 3500 3100 50  0000 C CNN
+F 3 "" H 3500 3100 50  0000 C CNN
+	1    3500 3100
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2900 2000 2900 2300
+Connection ~ 2900 2000
+Wire Wire Line
+	2900 2600 2900 3000
+Connection ~ 4500 3000
+Wire Wire Line
+	3500 3100 3500 3000
+Connection ~ 3500 3000
+Wire Wire Line
+	3700 2300 3700 2800
+Connection ~ 4200 2500
+Connection ~ 3700 2500
+Text Notes 1700 1750 0    60   ~ 0
+add current limiting
+Text GLabel 2500 2000 0    60   Input ~ 0
++VIN_DC
+Wire Wire Line
+	3700 2800 3550 2800
+$Comp
+L R R?
+U 1 1 58D0F036
+P 4200 2250
+F 0 "R?" V 4280 2250 50  0000 C CNN
+F 1 "220" V 4200 2250 50  0000 C CNN
+F 2 "" V 4130 2250 50  0000 C CNN
+F 3 "" H 4200 2250 50  0000 C CNN
+F 4 "Stackpole" V 4200 2250 60  0001 C CNN "Manufacturer"
+F 5 "CF14JT220R" V 4200 2250 60  0001 C CNN "Manufacturer PN"
+F 6 "RES 220 OHM 1/4W 5% AXIAL" V 4200 2250 60  0001 C CNN "Description"
+F 7 "Digikey" V 4200 2250 60  0001 C CNN "Distributor"
+F 8 "CF14JT220RCT-ND" V 4200 2250 60  0001 C CNN "Distributor PN"
+F 9 "0.10" V 4200 2250 60  0001 C CNN "Unit Price"
+	1    4200 2250
+	1    0    0    -1  
+$EndComp
+$Comp
+L D_ALT D?
+U 1 1 58D0F03D
+P 5300 2450
+F 0 "D?" V 5300 2550 50  0000 C CNN
+F 1 "1n4004" H 5300 2350 50  0000 C CNN
+F 2 "" H 5300 2450 50  0000 C CNN
+F 3 "https://www.diodes.com/assets/Datasheets/ds28002.pdf" H 5300 2450 50  0001 C CNN
+	1    5300 2450
+	0    -1   1    0   
+$EndComp
+Wire Wire Line
+	5300 2300 5300 2000
+Connection ~ 5300 2000
+Wire Wire Line
+	5300 3000 5300 2600
+Connection ~ 5000 3000
+$Comp
+L LM337T U?
+U 1 1 58D0F048
+P 8350 1950
+F 0 "U?" H 8150 1750 50  0000 C CNN
+F 1 "LM337T" H 8350 1750 50  0000 L CNN
+F 2 "TO-220" H 8350 1850 50  0000 C CIN
+F 3 "http://www.mouser.com/ds/2/149/LM337-1011059.pdf" H 8350 1950 50  0001 C CNN
+	1    8350 1950
+	1    0    0    -1  
+$EndComp
+$Comp
+L D_ALT D?
+U 1 1 58D0F04F
+P 8300 2500
+F 0 "D?" H 8300 2600 50  0000 C CNN
+F 1 "1n4004" H 8300 2400 50  0000 C CNN
+F 2 "" H 8300 2500 50  0000 C CNN
+F 3 "https://www.diodes.com/assets/Datasheets/ds28002.pdf" H 8300 2500 50  0001 C CNN
+	1    8300 2500
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	8450 2500 9050 2500
+Wire Wire Line
+	9050 2000 9050 2500
+Wire Wire Line
+	8750 2000 10150 2000
+Wire Wire Line
+	8150 2500 7650 2500
+Wire Wire Line
+	7650 2000 7650 2500
+Wire Wire Line
+	7150 2000 7950 2000
+Connection ~ 9050 2000
+Text Label 10150 2000 0    60   ~ 0
+-VOUT
+Connection ~ 7650 2000
+$Comp
+L CP1 C?
+U 1 1 58D0F05F
+P 9350 2400
+F 0 "C?" H 9375 2500 50  0000 L CNN
+F 1 "1u" H 9375 2300 50  0000 L CNN
+F 2 "" H 9350 2400 50  0000 C CNN
+F 3 "" H 9350 2400 50  0000 C CNN
+	1    9350 2400
+	1    0    0    1   
+$EndComp
+$Comp
+L R R?
+U 1 1 58D0F06C
+P 8850 1750
+F 0 "R?" V 8930 1750 50  0000 C CNN
+F 1 "220" V 8850 1750 50  0000 C CNN
+F 2 "" V 8780 1750 50  0000 C CNN
+F 3 "" H 8850 1750 50  0000 C CNN
+F 4 "Stackpole" V 8850 1750 60  0001 C CNN "Manufacturer"
+F 5 "CF14JT220R" V 8850 1750 60  0001 C CNN "Manufacturer PN"
+F 6 "RES 220 OHM 1/4W 5% AXIAL" V 8850 1750 60  0001 C CNN "Description"
+F 7 "Digikey" V 8850 1750 60  0001 C CNN "Distributor"
+F 8 "CF14JT220RCT-ND" V 8850 1750 60  0001 C CNN "Distributor PN"
+F 9 "0.10" V 8850 1750 60  0001 C CNN "Unit Price"
+	1    8850 1750
+	1    0    0    -1  
+$EndComp
+$Comp
+L D_ALT D?
+U 1 1 58D0F073
+P 9650 2400
+F 0 "D?" H 9650 2500 50  0000 C CNN
+F 1 "1n4004" H 9650 2300 50  0000 C CNN
+F 2 "" H 9650 2400 50  0000 C CNN
+F 3 "https://www.diodes.com/assets/Datasheets/ds28002.pdf" H 9650 2400 50  0001 C CNN
+	1    9650 2400
+	0    1    -1   0   
+$EndComp
+$Comp
+L C C?
+U 1 1 58D0F07A
+P 7350 2250
+F 0 "C?" H 7375 2350 50  0000 L CNN
+F 1 "100n" H 7375 2150 50  0000 L CNN
+F 2 "" H 7388 2100 50  0000 C CNN
+F 3 "" H 7350 2250 50  0000 C CNN
+	1    7350 2250
+	1    0    0    -1  
+$EndComp
+Text GLabel 7150 2000 0    60   Input ~ 0
+-VIN_DC
+Wire Wire Line
+	8350 1700 8350 1400
+Wire Wire Line
+	8150 1400 8850 1400
+Wire Wire Line
+	8850 1400 8850 1600
+Wire Wire Line
+	8850 1900 8850 2000
+Connection ~ 8850 2000
+Text Label 8150 1400 2    60   Italic 0
+v_set_neg
+Wire Wire Line
+	7350 2800 9650 2800
+Wire Wire Line
+	9350 2800 9350 2550
+Wire Wire Line
+	9650 2800 9650 2550
+Connection ~ 9350 2800
+Wire Wire Line
+	9350 2250 9350 2000
+Connection ~ 9350 2000
+Wire Wire Line
+	9650 2250 9650 2000
+Connection ~ 9650 2000
+Wire Wire Line
+	7350 2100 7350 2000
+Connection ~ 7350 2000
+Wire Wire Line
+	7350 2400 7350 2800
+$Comp
+L Earth #PWR?
+U 1 1 58D0F093
+P 8350 2800
+F 0 "#PWR?" H 8350 2550 50  0001 C CNN
+F 1 "Earth" H 8350 2650 50  0001 C CNN
+F 2 "" H 8350 2800 50  0000 C CNN
+F 3 "" H 8350 2800 50  0000 C CNN
+	1    8350 2800
+	1    0    0    -1  
+$EndComp
+Connection ~ 8350 2800
+Connection ~ 8350 1400
+$Comp
+L TL071 U?
+U 1 1 58D0F09B
+P 6900 4800
+F 0 "U?" H 6900 5000 50  0000 L CNN
+F 1 "TL071" H 6900 4600 50  0000 L CNN
+F 2 "" H 6950 5000 50  0000 C CNN
+F 3 "" H 6900 5050 50  0000 C CNN
+	1    6900 4800
+	1    0    0    -1  
+$EndComp
+Text GLabel 4700 4350 1    60   Input ~ 0
++VIN_DC
+Wire Wire Line
+	4700 4350 4700 4600
+Wire Wire Line
+	4500 5000 4300 5000
+Wire Wire Line
+	4300 5000 4300 5450
+Wire Wire Line
+	4300 5450 5350 5450
+Wire Wire Line
+	5350 5450 5350 4900
+Wire Wire Line
+	2600 4800 4500 4800
+Text HLabel 1300 4700 0    60   Input ~ 0
+v_set
+Text Notes 3900 4800 0    60   Italic 0
+0 to 10.75V
+$Comp
+L R R?
+U 1 1 58D0F0AB
+P 6850 5500
+F 0 "R?" V 6930 5500 50  0000 C CNN
+F 1 "R" V 6850 5500 50  0000 C CNN
+F 2 "" V 6780 5500 50  0000 C CNN
+F 3 "" H 6850 5500 50  0000 C CNN
+	1    6850 5500
+	0    1    1    0   
+$EndComp
+$Comp
+L R R?
+U 1 1 58D0F0B2
+P 6250 4900
+F 0 "R?" V 6330 4900 50  0000 C CNN
+F 1 "R" V 6250 4900 50  0000 C CNN
+F 2 "" V 6180 4900 50  0000 C CNN
+F 3 "" H 6250 4900 50  0000 C CNN
+	1    6250 4900
+	0    -1   -1   0   
+$EndComp
+Connection ~ 5350 4900
+Text Notes 5450 4900 0    60   Italic 0
+0 to 10.75V
+Text GLabel 6900 5300 2    60   Input Italic 0
+-VIN_DC
+Wire Wire Line
+	6800 5100 6800 5300
+Wire Wire Line
+	6800 5300 6900 5300
+Wire Wire Line
+	6500 5500 6700 5500
+Wire Wire Line
+	7500 5500 7000 5500
+Wire Wire Line
+	7200 4800 8300 4800
+Wire Wire Line
+	6400 4700 6600 4700
+Connection ~ 6500 4900
+Text Notes 7600 4800 0    60   Italic 0
+0 to -10.75V
+$Comp
+L +5V #PWR?
+U 1 1 58D0F0C4
+P 6800 4500
+F 0 "#PWR?" H 6800 4350 50  0001 C CNN
+F 1 "+5V" H 6800 4640 50  0000 C CNN
+F 2 "" H 6800 4500 50  0000 C CNN
+F 3 "" H 6800 4500 50  0000 C CNN
+	1    6800 4500
+	1    0    0    -1  
+$EndComp
+$Comp
+L -5V #PWR?
+U 1 1 58D0F0CA
+P 4700 5200
+F 0 "#PWR?" H 4700 5300 50  0001 C CNN
+F 1 "-5V" H 4700 5350 50  0000 C CNN
+F 2 "" H 4700 5200 50  0000 C CNN
+F 3 "" H 4700 5200 50  0000 C CNN
+	1    4700 5200
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	7500 5500 7500 4800
+Connection ~ 7500 4800
+Text Label 8300 4800 0    60   Italic 0
+v_set_neg
+$Comp
+L Earth #PWR?
+U 1 1 58D0F0D3
+P 6400 4700
+F 0 "#PWR?" H 6400 4450 50  0001 C CNN
+F 1 "Earth" H 6400 4550 50  0001 C CNN
+F 2 "" H 6400 4700 50  0000 C CNN
+F 3 "" H 6400 4700 50  0000 C CNN
+	1    6400 4700
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	1300 4700 2000 4700
+$Comp
+L -5V #PWR?
+U 1 1 58D0F0DA
+P 2200 5100
+F 0 "#PWR?" H 2200 5200 50  0001 C CNN
+F 1 "-5V" H 2200 5250 50  0000 C CNN
+F 2 "" H 2200 5100 50  0000 C CNN
+F 3 "" H 2200 5100 50  0000 C CNN
+	1    2200 5100
+	-1   0    0    1   
+$EndComp
+Text GLabel 2200 4300 1    60   Input ~ 0
++VIN_DC
+Text Notes 1450 4700 0    60   Italic 0
+0 to 2V
+Wire Wire Line
+	6500 4900 6500 5500
+Wire Wire Line
+	6400 4900 6600 4900
+Wire Wire Line
+	5100 4900 6100 4900
+$Comp
+L R R?
+U 1 1 58D0F0E5
+P 1800 5650
+F 0 "R?" V 1880 5650 50  0000 C CNN
+F 1 "R" V 1800 5650 50  0000 C CNN
+F 2 "" V 1730 5650 50  0000 C CNN
+F 3 "" H 1800 5650 50  0000 C CNN
+	1    1800 5650
+	1    0    0    -1  
+$EndComp
+$Comp
+L R R?
+U 1 1 58D0F0EC
+P 2050 5400
+F 0 "R?" V 2130 5400 50  0000 C CNN
+F 1 "R" V 2050 5400 50  0000 C CNN
+F 2 "" V 1980 5400 50  0000 C CNN
+F 3 "" H 2050 5400 50  0000 C CNN
+	1    2050 5400
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	1800 4900 1800 5500
+Wire Wire Line
+	1800 5400 1900 5400
+Wire Wire Line
+	1800 4900 2000 4900
+Connection ~ 1800 5400
+Wire Wire Line
+	2200 5400 2700 5400
+Wire Wire Line
+	2700 5400 2700 4800
+Connection ~ 2700 4800
+$Comp
+L Earth #PWR?
+U 1 1 58D0F0FA
+P 1800 5900
+F 0 "#PWR?" H 1800 5650 50  0001 C CNN
+F 1 "Earth" H 1800 5750 50  0001 C CNN
+F 2 "" H 1800 5900 50  0000 C CNN
+F 3 "" H 1800 5900 50  0000 C CNN
+	1    1800 5900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1800 5900 1800 5800
+Text Notes 2300 5650 0    60   Italic 0
+gain = 6 = (1 + 50k/10k)
+Wire Wire Line
+	2200 4300 2200 4500
+Text Label 2900 4800 0    60   Italic 0
+v_set_pos
+Text Label 3550 2800 2    60   Italic 0
+v_set_pos
+$Comp
+L TL072 U?
+U 1 1 58D0F105
+P 2300 4800
+F 0 "U?" H 2300 5000 50  0000 L CNN
+F 1 "TL072" H 2300 4600 50  0000 L CNN
+F 2 "" H 2300 4800 50  0000 C CNN
+F 3 "" H 2300 4800 50  0000 C CNN
+	1    2300 4800
+	1    0    0    -1  
+$EndComp
+$Comp
+L TL072 U?
+U 1 1 58D0F10C
+P 4800 4900
+F 0 "U?" H 4800 5100 50  0000 L CNN
+F 1 "TL072" H 4800 4700 50  0000 L CNN
+F 2 "" H 4800 4900 50  0000 C CNN
+F 3 "" H 4800 4900 50  0000 C CNN
+	1    4800 4900
+	1    0    0    -1  
+$EndComp
+$EndSCHEMATC
